@@ -1,0 +1,21 @@
+[Unit]
+Description=KubeTrain2 Agent
+After=network.target docker.service
+Wants=docker.service
+
+[Service]
+Type=simple
+User=kubetrain
+Group=kubetrain
+WorkingDirectory=/opt/KubeTrain2
+Environment=PYTHONUNBUFFERED=1
+Environment=KUBETRAIN_SERVER=http://127.0.0.1:8010
+Environment=AGENT_PORT=8005
+ExecStart=/bin/bash -lc 'conda run -n bs python agent/te_agent.py --server ${KUBETRAIN_SERVER} --agent-port ${AGENT_PORT} --max-tasks 2'
+Restart=always
+RestartSec=10
+StandardOutput=append:/opt/KubeTrain2/logs/agent.log
+StandardError=append:/opt/KubeTrain2/logs/agent.log
+
+[Install]
+WantedBy=multi-user.target

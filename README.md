@@ -66,6 +66,9 @@ KubeTrain2/
 ├── agent/
 │   └── te_agent.py            # 训练 Agent（部署到 Worker 节点）
 ├── kubetrain2.sql              # 数据库初始化 SQL
+├── scripts/                   # Linux 启停脚本
+├── deploy/                    # Linux Nginx / systemd 模板
+├── DEPLOY_LINUX.md            # Linux 服务器部署说明
 ├── start.ps1                  # Windows 一键启动脚本
 └── README.md
 ```
@@ -120,7 +123,17 @@ NFS_REMOTE_BASE=/data/kubetrain
 .\start.ps1 -All
 ```
 
-**方式 B：手动启动**
+**方式 B：Linux 服务器部署**
+```bash
+chmod +x scripts/*.sh
+./scripts/start_frontend.sh build
+./scripts/start_backend.sh
+./scripts/status.sh
+```
+
+更完整的 Linux 部署、Nginx 发布、systemd 服务和 Agent 部署步骤见：`DEPLOY_LINUX.md`。
+
+**方式 C：手动启动**
 ```powershell
 # 后端
 cd backend
@@ -166,7 +179,7 @@ npm run dev
 pip install requests torch
 
 # 启动 Agent（指向后端地址）
-python te_agent.py --backend http://master_ip:8010 --worker-id worker-01 --pool-id <pool_id>
+python te_agent.py --server http://master_ip:8010 --worker-id worker-01 --pool-id <pool_id>
 ```
 
 ## 技术栈

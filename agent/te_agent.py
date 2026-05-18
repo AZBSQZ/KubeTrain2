@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""训练执行子系统 - Worker Agent
-部署到计算节点，自动注册到 TE 注册中心并定期发送心跳。
+"""KubeTrain2 - Worker Agent
+部署到计算节点，自动注册到 KubeTrain2 后端并定期发送心跳。
 
 用法:
-  python3 te_agent.py --server http://192.168.171.1:8004
-  python3 te_agent.py --server http://192.168.171.1:8004 --pool-id <pool_id>
-  python3 te_agent.py --server http://192.168.171.1:8004 --token <service_token>
+  python3 te_agent.py --server http://192.168.171.1:8010
+  python3 te_agent.py --server http://192.168.171.1:8010 --pool-id <pool_id>
+  python3 te_agent.py --server http://192.168.171.1:8010 --token <service_token>
 
 依赖: Python 3.6+, requests (pip3 install requests)
 """
@@ -41,7 +41,7 @@ AGENT_VERSION = '1.0.0'
 class TEWorkerAgent:
     """Worker Agent - 在计算节点上运行，自动注册并发送心跳"""
 
-    DEFAULT_SERVICE_TOKEN = 'taitp-internal-service-2024'
+    DEFAULT_SERVICE_TOKEN = 'kubetrain2-internal-service-2024'
 
     def __init__(self, server_url: str, pool_id: str = None,
                  heartbeat_interval: int = 30, max_tasks: int = 2,
@@ -73,11 +73,11 @@ class TEWorkerAgent:
     def start(self, agent_port: int = 8005):
         """启动 Agent"""
         self.agent_port = agent_port
-        logger.info(f"TE Agent v{AGENT_VERSION} starting...")
+        logger.info(f"KubeTrain2 Agent v{AGENT_VERSION} starting...")
         logger.info(f"  Server: {self.server_url}")
         logger.info(f"  API Base: {self.api_base}")
         if self.proxy_mode:
-            logger.info(f"  Mode: PROXY (via taitp frontend)")
+            logger.info("  Mode: PROXY")
         logger.info(f"  Worker ID: {self.worker_id}")
         logger.info(f"  Heartbeat: {self.heartbeat_interval}s")
         logger.info(f"  Agent HTTP port: {agent_port}")
@@ -650,7 +650,7 @@ class TEWorkerAgent:
 
         # 环境变量：先注入用户自定义环境变量，再用容器路径覆盖（确保容器路径优先）
         docker_env = {k: str(v) for k, v in environment.items()}
-        # 容器内固定路径（覆盖taitp传入的宿主机路径）
+        # 容器内固定路径（覆盖外部传入的宿主机路径）
         world_size = nproc_per_node if parallel_mode == 'ddp' else 1
         docker_env.update({
             'PYTHONUNBUFFERED': '1',
@@ -1048,8 +1048,8 @@ class TEWorkerAgent:
 
 
 def main():
-    parser = argparse.ArgumentParser(description='TE Worker Agent')
-    parser.add_argument('--server', required=True, help='TE API server URL (e.g. http://192.168.171.1:8004)')
+    parser = argparse.ArgumentParser(description='KubeTrain2 Worker Agent')
+    parser.add_argument('--server', required=True, help='KubeTrain2 API server URL (e.g. http://192.168.171.1:8010)')
     parser.add_argument('--pool-id', default=None, help='Node pool ID (auto-creates default if omitted)')
     parser.add_argument('--worker-id', default=None, help='Worker ID (auto-generated if omitted)')
     parser.add_argument('--heartbeat', type=int, default=30, help='Heartbeat interval in seconds')
@@ -1058,7 +1058,7 @@ def main():
     parser.add_argument('--labels', type=json.loads, default={}, help='Extra labels as JSON')
     parser.add_argument('--token', default=None, help='Internal service token for authentication')
     parser.add_argument('--proxy', action='store_true',
-                        help='Use proxy mode: route through taitp frontend (21096) instead of direct TE (8004)')
+                        help='Use proxy mode: route worker API through a reverse proxy')
     parser.add_argument('--agent-port', type=int, default=8005,
                         help='HTTP port for receiving task dispatch (default: 8005)')
 

@@ -1,0 +1,19 @@
+[Unit]
+Description=KubeTrain2 Backend
+After=network.target mysql.service redis-server.service
+Wants=mysql.service redis-server.service
+
+[Service]
+Type=simple
+User=kubetrain
+Group=kubetrain
+WorkingDirectory=/opt/KubeTrain2/backend
+Environment=PYTHONUNBUFFERED=1
+ExecStart=/bin/bash -lc 'conda run -n bs python run.py'
+Restart=always
+RestartSec=10
+StandardOutput=append:/opt/KubeTrain2/logs/backend.log
+StandardError=append:/opt/KubeTrain2/logs/backend.log
+
+[Install]
+WantedBy=multi-user.target
