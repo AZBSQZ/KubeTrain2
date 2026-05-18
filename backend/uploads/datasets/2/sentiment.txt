@@ -1,0 +1,400 @@
+1	recommend quality excellent highly
+0	terrible quickly product broke
+0	of money waste awful quality
+0	product terrible quickly broke
+0	performance disappointing poor
+1	quality outstanding superb design
+0	service defective bad item
+0	the disappointed worth price not very
+0	falls cheap apart easily material
+0	performance poor disappointing
+0	defective bad service item
+0	easily cheap material falls apart
+0	quickly product terrible broke
+1	very impressive satisfied results
+1	fantastic service good value
+0	quality waste of money awful
+1	perfect fit experience wonderful
+0	price disappointed very worth the not
+0	service bad defective item
+1	product great works well
+0	quickly product terrible broke
+0	quickly broke product terrible
+1	happy ever purchase customer best
+0	apart falls material cheap easily
+1	highly recommend excellent quality
+1	works product well great
+0	apart falls easily cheap material
+0	bad item defective service
+1	perfect experience wonderful fit
+0	ever buying worst purchase regret
+1	value good fantastic service
+0	item bad service defective
+0	never again horrible experience
+1	this amazing love performance
+0	money of awful waste quality
+1	outstanding superb quality design
+1	fit perfect wonderful experience
+0	product terrible quickly broke
+1	good service value fantastic
+1	impressive satisfied very results
+1	best ever customer happy purchase
+0	performance disappointing poor
+0	quickly terrible product broke
+1	service good fantastic value
+1	impressive results very satisfied
+1	good fantastic value service
+1	design outstanding quality superb
+1	results very impressive satisfied
+1	design quality superb outstanding
+1	great works well product
+0	item bad service defective
+0	terrible broke quickly product
+0	awful waste of money quality
+0	broke terrible quickly product
+1	recommend excellent quality highly
+1	highly quality recommend excellent
+1	quality excellent highly recommend
+0	falls easily apart material cheap
+0	again horrible never experience
+0	defective bad service item
+0	never again horrible experience
+0	disappointed worth the not very price
+0	worth the not very disappointed price
+0	item defective bad service
+0	ever regret buying purchase worst
+0	waste of quality money awful
+0	bad defective item service
+1	excellent recommend quality highly
+1	quality excellent highly recommend
+0	again experience never horrible
+0	apart cheap falls material easily
+1	recommend highly quality excellent
+0	regret purchase worst buying ever
+1	results very impressive satisfied
+1	value good service fantastic
+0	waste awful money of quality
+0	performance disappointing poor
+1	fit perfect experience wonderful
+1	happy purchase ever customer best
+0	broke quickly terrible product
+1	results very impressive satisfied
+0	disappointed not worth price the very
+1	experience wonderful fit perfect
+0	buying purchase regret worst ever
+1	best customer ever purchase happy
+0	quality awful of money waste
+0	awful waste money quality of
+1	wonderful fit perfect experience
+0	ever regret buying purchase worst
+1	very satisfied impressive results
+1	experience fit wonderful perfect
+1	performance love amazing this
+0	quality of money waste awful
+0	quickly product broke terrible
+0	defective bad item service
+0	item bad service defective
+0	experience again horrible never
+1	excellent recommend highly quality
+1	wonderful fit perfect experience
+1	performance amazing this love
+1	works well great product
+1	works well product great
+0	cheap easily falls apart material
+0	performance poor disappointing
+1	very satisfied impressive results
+0	defective bad service item
+1	love performance this amazing
+0	buying worst purchase regret ever
+0	money awful quality of waste
+0	regret worst ever purchase buying
+0	of money quality awful waste
+0	apart cheap falls easily material
+1	superb design quality outstanding
+1	outstanding quality superb design
+1	service fantastic good value
+1	satisfied results very impressive
+0	awful waste money quality of
+0	awful waste quality of money
+1	product works well great
+1	well great works product
+0	bad service defective item
+0	worst regret purchase buying ever
+1	works product great well
+0	quickly product broke terrible
+0	defective service item bad
+1	outstanding quality design superb
+0	apart cheap falls material easily
+0	poor performance disappointing
+1	ever best customer purchase happy
+0	money of waste quality awful
+1	amazing this performance love
+1	outstanding superb design quality
+1	very impressive results satisfied
+0	product terrible broke quickly
+1	wonderful experience perfect fit
+0	terrible product broke quickly
+0	very price the worth not disappointed
+0	waste quality of awful money
+1	quality excellent recommend highly
+1	great works product well
+1	best customer purchase ever happy
+0	item service bad defective
+1	product great well works
+0	of waste money awful quality
+0	item bad service defective
+1	love performance amazing this
+0	experience horrible again never
+0	product quickly terrible broke
+1	love amazing this performance
+0	not price the very worth disappointed
+0	service defective item bad
+0	not disappointed very worth price the
+0	never experience horrible again
+1	impressive results very satisfied
+1	well product works great
+1	outstanding design quality superb
+0	money awful quality of waste
+1	value fantastic service good
+0	product broke quickly terrible
+0	money quality awful waste of
+0	product quickly broke terrible
+0	performance poor disappointing
+1	quality recommend highly excellent
+0	experience again never horrible
+0	very the worth price not disappointed
+1	customer happy best purchase ever
+1	superb outstanding quality design
+0	defective bad item service
+0	poor performance disappointing
+0	very the disappointed price worth not
+1	experience perfect fit wonderful
+0	defective service bad item
+0	quickly product broke terrible
+0	buying purchase ever worst regret
+0	falls apart easily material cheap
+1	satisfied results very impressive
+0	service defective bad item
+0	ever buying purchase regret worst
+0	product terrible broke quickly
+0	apart easily material falls cheap
+1	satisfied very impressive results
+0	poor disappointing performance
+0	bad service defective item
+1	works well product great
+0	product broke terrible quickly
+1	satisfied impressive very results
+1	works great well product
+0	quickly terrible broke product
+0	quickly product terrible broke
+1	highly quality recommend excellent
+1	good value service fantastic
+0	material apart easily cheap falls
+0	performance disappointing poor
+0	money awful of quality waste
+1	this amazing love performance
+0	falls apart easily cheap material
+0	again experience never horrible
+0	the price not very worth disappointed
+1	design superb outstanding quality
+1	satisfied results very impressive
+0	quickly broke terrible product
+1	quality excellent recommend highly
+0	disappointing poor performance
+0	never horrible experience again
+0	quickly product broke terrible
+0	cheap material apart easily falls
+0	quickly broke terrible product
+0	money of waste quality awful
+1	best customer ever purchase happy
+0	of money awful quality waste
+1	value good fantastic service
+0	the very disappointed worth price not
+0	buying worst ever regret purchase
+1	perfect wonderful fit experience
+0	product quickly terrible broke
+1	very results impressive satisfied
+0	item bad defective service
+1	service good value fantastic
+1	fantastic good value service
+0	cheap falls apart easily material
+1	amazing performance this love
+0	price the worth not very disappointed
+0	quality waste awful money of
+1	product works great well
+0	performance poor disappointing
+0	bad item defective service
+1	works great product well
+1	outstanding superb design quality
+1	well works product great
+1	perfect wonderful experience fit
+1	quality excellent recommend highly
+1	happy ever purchase customer best
+0	quickly terrible product broke
+1	highly recommend excellent quality
+0	money awful waste quality of
+0	defective bad service item
+0	purchase worst ever buying regret
+0	bad service defective item
+1	highly excellent recommend quality
+0	experience again horrible never
+0	money waste awful of quality
+1	well great product works
+0	falls easily material cheap apart
+0	poor performance disappointing
+0	worst purchase buying regret ever
+0	again experience horrible never
+0	buying purchase regret worst ever
+0	horrible again never experience
+0	again never horrible experience
+0	worst ever regret purchase buying
+0	performance poor disappointing
+1	happy best customer ever purchase
+1	recommend highly quality excellent
+1	results satisfied impressive very
+1	customer best purchase happy ever
+1	results impressive satisfied very
+1	well great works product
+0	cheap falls apart material easily
+0	quickly terrible broke product
+1	fit perfect wonderful experience
+1	satisfied results very impressive
+0	regret purchase ever worst buying
+0	easily cheap material apart falls
+0	purchase worst buying regret ever
+0	the not worth very price disappointed
+1	quality superb outstanding design
+0	bad service defective item
+0	apart falls material easily cheap
+0	price the not worth very disappointed
+1	perfect experience wonderful fit
+1	wonderful experience perfect fit
+0	terrible broke quickly product
+1	satisfied results very impressive
+0	the very price not worth disappointed
+0	awful quality of waste money
+1	experience wonderful perfect fit
+0	product quickly terrible broke
+0	very price not the worth disappointed
+0	apart easily material cheap falls
+1	recommend excellent highly quality
+1	love performance this amazing
+0	purchase regret buying ever worst
+0	bad item service defective
+0	experience never again horrible
+1	service good value fantastic
+1	highly recommend excellent quality
+0	worst buying ever regret purchase
+0	service item defective bad
+0	never horrible again experience
+0	quality waste money awful of
+1	quality superb design outstanding
+0	broke product terrible quickly
+0	service defective item bad
+1	good service fantastic value
+0	horrible experience again never
+0	performance poor disappointing
+0	quickly terrible broke product
+1	this performance amazing love
+1	results impressive satisfied very
+0	awful of money waste quality
+0	disappointing poor performance
+1	purchase ever customer happy best
+0	buying purchase regret worst ever
+0	cheap material easily apart falls
+1	impressive satisfied very results
+0	apart falls easily cheap material
+0	the very worth price not disappointed
+0	material easily falls cheap apart
+0	disappointing poor performance
+1	superb quality design outstanding
+1	wonderful experience fit perfect
+0	easily material cheap falls apart
+0	defective bad service item
+1	this amazing performance love
+1	very results satisfied impressive
+1	customer best happy ever purchase
+1	very results impressive satisfied
+1	impressive results satisfied very
+1	works well product great
+0	ever worst purchase buying regret
+0	bad defective item service
+0	easily material falls cheap apart
+1	results impressive very satisfied
+1	outstanding design quality superb
+1	purchase happy best customer ever
+1	performance love this amazing
+1	customer ever purchase best happy
+1	quality design outstanding superb
+0	service item defective bad
+1	quality recommend excellent highly
+1	great product works well
+1	design quality outstanding superb
+1	ever best purchase customer happy
+1	excellent highly recommend quality
+1	best happy customer ever purchase
+0	awful waste of quality money
+0	easily apart falls cheap material
+1	fit experience perfect wonderful
+0	buying purchase regret ever worst
+0	worst ever buying regret purchase
+1	satisfied very impressive results
+1	fantastic good value service
+1	great works well product
+0	horrible again experience never
+0	awful waste money of quality
+1	perfect wonderful fit experience
+0	performance disappointing poor
+1	wonderful perfect experience fit
+0	broke quickly terrible product
+0	service bad item defective
+1	product works great well
+1	excellent quality recommend highly
+1	quality outstanding design superb
+0	again never horrible experience
+1	experience perfect wonderful fit
+1	purchase best customer happy ever
+1	service good fantastic value
+0	bad defective service item
+1	great product works well
+1	excellent quality recommend highly
+0	disappointing poor performance
+0	purchase regret buying worst ever
+1	great works well product
+0	buying ever regret purchase worst
+0	material apart cheap easily falls
+0	horrible experience never again
+1	superb design quality outstanding
+1	impressive results very satisfied
+1	ever purchase customer best happy
+1	customer best purchase ever happy
+1	this love amazing performance
+0	poor performance disappointing
+0	of waste money quality awful
+1	outstanding design quality superb
+1	performance this love amazing
+1	service good value fantastic
+0	apart falls cheap material easily
+1	good service value fantastic
+0	again never experience horrible
+1	amazing performance this love
+1	recommend quality highly excellent
+1	results very impressive satisfied
+1	fantastic service value good
+0	falls cheap apart easily material
+0	apart falls easily cheap material
+0	disappointed very not price the worth
+0	worst buying ever purchase regret
+1	experience perfect fit wonderful
+0	poor disappointing performance
+1	well works product great
+0	apart cheap easily material falls
+1	wonderful fit perfect experience
+1	very satisfied impressive results
+1	superb outstanding design quality
+0	horrible never experience again
+1	wonderful experience fit perfect
+1	outstanding superb design quality
+1	this amazing love performance
+0	performance disappointing poor
+0	never horrible experience again
