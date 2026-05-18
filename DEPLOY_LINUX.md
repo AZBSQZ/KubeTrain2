@@ -397,32 +397,7 @@ chmod +x scripts/*.sh
 
 ./scripts/install_ubuntu_deps.sh
 
-export KT_DB_PASSWORD="$(python3 - <<'PY'
-import secrets
-print('Kt2_' + secrets.token_hex(16))
-PY
-)"
-export KT_SECRET_KEY="$(python3 - <<'PY'
-import secrets
-print(secrets.token_urlsafe(48))
-PY
-)"
-export KT_JWT_SECRET_KEY="$(python3 - <<'PY'
-import secrets
-print(secrets.token_urlsafe(48))
-PY
-)"
-
-DB_USER=kubetrain DB_PASSWORD="$KT_DB_PASSWORD" ./scripts/init_mysql.sh
-
-cp -n backend/.env.example backend/.env
-sed -i 's/^DB_HOST=.*/DB_HOST=127.0.0.1/' backend/.env
-sed -i 's/^DB_USER=.*/DB_USER=kubetrain/' backend/.env
-sed -i "s/^DB_PASSWORD=.*/DB_PASSWORD=$KT_DB_PASSWORD/" backend/.env
-sed -i 's/^DB_NAME=.*/DB_NAME=kubetrain2/' backend/.env
-sed -i 's/^FLASK_ENV=.*/FLASK_ENV=production/' backend/.env
-sed -i "s/^SECRET_KEY=.*/SECRET_KEY=$KT_SECRET_KEY/" backend/.env
-sed -i "s/^JWT_SECRET_KEY=.*/JWT_SECRET_KEY=$KT_JWT_SECRET_KEY/" backend/.env
+./scripts/configure_env.sh
 vim backend/.env
 
 ./scripts/start_frontend.sh build

@@ -37,6 +37,24 @@ if [[ ! -f "$BACKEND_DIR/.env" ]]; then
     echo "WARN: backend/.env not found. Copy backend/.env.example to backend/.env before production deployment."
 fi
 
+if [[ -f "$BACKEND_DIR/.env" ]]; then
+    env_value() {
+        local key="$1"
+        grep -E "^${key}=" "$BACKEND_DIR/.env" | tail -n 1 | cut -d= -f2-
+    }
+    flask_env="$(env_value FLASK_ENV)"
+    if [[ "$flask_env" == "production" ]]; then
+        for key in SECRET_KEY JWT_SECRET_KEY DB_PASSWORD; do
+            value="$(env_value "$key")"
+            if [[ -z "$value" ]]; then
+                echo "ERROR: backend/.env has empty $key in production mode." >&2
+                echo "Run: ./scripts/configure_env.sh" >&2
+                exit 1
+            fi
+        done
+    fi
+fi
+
 if [[ -n "$PYTHON_CMD" ]]; then
     PY_RUNNER="$PYTHON_CMD"
 elif command -v conda >/dev/null 2>&1; then

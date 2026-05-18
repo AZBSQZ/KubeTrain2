@@ -37,6 +37,12 @@ case "$MODE" in
         echo "Installing frontend dependencies..."
         cd "$FRONTEND_DIR"
         npm install
+        if [[ -d "$FRONTEND_DIR/node_modules/.bin" ]]; then
+            chmod -R u+x "$FRONTEND_DIR/node_modules/.bin" 2>/dev/null || true
+        fi
+        if [[ -f "$FRONTEND_DIR/node_modules/vite/bin/vite.js" ]]; then
+            chmod u+x "$FRONTEND_DIR/node_modules/vite/bin/vite.js" 2>/dev/null || true
+        fi
         echo "Building frontend static files..."
         npm run build
         echo "Frontend build completed: $FRONTEND_DIR/dist"
