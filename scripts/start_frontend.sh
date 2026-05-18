@@ -23,6 +23,15 @@ if [[ ! -f "$FRONTEND_DIR/package.json" ]]; then
     exit 1
 fi
 
+if ! command -v npm >/dev/null 2>&1; then
+    echo "ERROR: npm not found. Install Node.js/npm first." >&2
+    echo "Ubuntu example:" >&2
+    echo "  apt-get update && apt-get install -y nodejs npm" >&2
+    echo "or run:" >&2
+    echo "  ./scripts/install_ubuntu_deps.sh" >&2
+    exit 1
+fi
+
 case "$MODE" in
     build|prod|production)
         echo "Installing frontend dependencies..."

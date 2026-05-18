@@ -19,7 +19,15 @@
 
 ```bash
 sudo apt update
-sudo apt install -y nginx mysql-server redis-server curl git build-essential lsof
+sudo apt install -y python3 python3-venv python3-pip nodejs npm nginx mysql-server mysql-client redis-server curl git build-essential lsof
+```
+
+也可以在项目目录下直接执行辅助脚本，完成系统依赖、服务启用和 Python `.venv` 后端依赖安装：
+
+```bash
+cd /opt/KubeTrain2
+chmod +x scripts/*.sh
+./scripts/install_ubuntu_deps.sh
 ```
 
 ### CentOS / Rocky Linux
@@ -31,11 +39,21 @@ sudo systemctl enable --now mysqld redis nginx
 
 ## 3. 准备 Python 与 Node.js
 
-推荐使用已有的 conda 环境 `bs`。
+如果服务器已经有 conda，推荐使用 conda 环境 `bs`。
 
 ```bash
 conda create -n bs python=3.10 -y
 conda run -n bs python --version
+```
+
+如果服务器没有 conda，直接使用 Python 虚拟环境：
+
+```bash
+cd /opt/KubeTrain2
+python3 -m venv .venv
+. .venv/bin/activate
+python -m pip install --upgrade pip setuptools wheel
+pip install -r backend/requirements.txt
 ```
 
 安装 Node.js 18+ 后检查版本：
@@ -76,6 +94,27 @@ sudo systemctl enable --now redis-server || sudo systemctl enable --now redis
 ```bash
 mysql -u root -p -e "CREATE DATABASE IF NOT EXISTS kubetrain2 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
 mysql -u root -p kubetrain2 < kubetrain2.sql
+```
+
+Ubuntu 默认 MySQL 可能使用 `auth_socket`，root 用户可直接执行：
+
+```bash
+mysql -u root -e "CREATE DATABASE IF NOT EXISTS kubetrain2 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
+mysql -u root kubetrain2 < kubetrain2.sql
+```
+
+如需为 KubeTrain2 单独创建数据库用户：
+
+```bash
+mysql -u root -e "CREATE USER IF NOT EXISTS 'kubetrain'@'localhost' IDENTIFIED BY '请替换为强密码';"
+mysql -u root -e "GRANT ALL PRIVILEGES ON kubetrain2.* TO 'kubetrain'@'localhost'; FLUSH PRIVILEGES;"
+```
+
+然后在 `backend/.env` 中设置：
+
+```ini
+DB_USER=kubetrain
+DB_PASSWORD=请替换为强密码
 ```
 
 ## 6. 配置后端环境变量
@@ -146,7 +185,17 @@ cd /opt/KubeTrain2
 安装 Nginx 配置：
 
 ```bash
+sudo mkdir -p /etc/nginx/conf.d
 sudo cp deploy/kubetrain2.nginx.conf /etc/nginx/conf.d/kubetrain2.conf
+sudo nginx -t
+sudo systemctl reload nginx
+```
+
+如果当前 Nginx 主配置没有加载 `/etc/nginx/conf.d/*.conf`，可改用 Ubuntu 默认站点方式：
+
+```bash
+sudo cp deploy/kubetrain2.nginx.conf /etc/nginx/sites-available/kubetrain2
+sudo ln -sf /etc/nginx/sites-available/kubetrain2 /etc/nginx/sites-enabled/kubetrain2
 sudo nginx -t
 sudo systemctl reload nginx
 ```
@@ -178,7 +227,7 @@ tail -f /opt/KubeTrain2/logs/backend.log
 
 ### systemd 方式
 
-先按实际部署用户和目录修改 `deploy/kubetrain2-backend.service`，然后安装：
+`deploy/kubetrain2-backend.service` 默认使用 `/opt/KubeTrain2/.venv/bin/python`。如果使用 conda，需要把 `ExecStart` 改为 `conda run -n bs python run.py`，然后安装：
 
 ```bash
 sudo cp deploy/kubetrain2-backend.service /etc/systemd/system/kubetrain2-backend.service
@@ -253,7 +302,7 @@ sudo systemctl enable --now kubetrain2-agent
 sudo systemctl status kubetrain2-agent
 ```
 
-安装 systemd 服务前，需要将 `deploy/kubetrain2-agent.service` 中的 `KUBETRAIN_SERVER` 改为真实后端地址。
+安装 systemd 服务前，需要将 `deploy/kubetrain2-agent.service` 中的 `KUBETRAIN_SERVER` 改为真实后端地址。该模板默认使用 `/opt/KubeTrain2/.venv/bin/python`；如果使用 conda，需要同步修改 `ExecStart`。
 
 ## 12. 开发模式前端
 
@@ -337,6 +386,55 @@ mysql -u root -p -e "SHOW DATABASES LIKE 'kubetrain2';"
 ```
 
 ## 15. 一组最小启动命令
+
+### Ubuntu 无 conda 服务器
+
+适用于首次运行时报 `conda: command not found`、`mysql: command not found`、`npm: command not found`、`nginx: command not found` 的服务器：
+
+```bash
+cd /opt/KubeTrain2
+chmod +x scripts/*.sh
+
+./scripts/install_ubuntu_deps.sh
+
+export KT_DB_PASSWORD="$(python3 - <<'PY'
+import secrets
+print('Kt2_' + secrets.token_hex(16))
+PY
+)"
+export KT_SECRET_KEY="$(python3 - <<'PY'
+import secrets
+print(secrets.token_urlsafe(48))
+PY
+)"
+export KT_JWT_SECRET_KEY="$(python3 - <<'PY'
+import secrets
+print(secrets.token_urlsafe(48))
+PY
+)"
+
+DB_USER=kubetrain DB_PASSWORD="$KT_DB_PASSWORD" ./scripts/init_mysql.sh
+
+cp -n backend/.env.example backend/.env
+sed -i 's/^DB_HOST=.*/DB_HOST=127.0.0.1/' backend/.env
+sed -i 's/^DB_USER=.*/DB_USER=kubetrain/' backend/.env
+sed -i "s/^DB_PASSWORD=.*/DB_PASSWORD=$KT_DB_PASSWORD/" backend/.env
+sed -i 's/^DB_NAME=.*/DB_NAME=kubetrain2/' backend/.env
+sed -i 's/^FLASK_ENV=.*/FLASK_ENV=production/' backend/.env
+sed -i "s/^SECRET_KEY=.*/SECRET_KEY=$KT_SECRET_KEY/" backend/.env
+sed -i "s/^JWT_SECRET_KEY=.*/JWT_SECRET_KEY=$KT_JWT_SECRET_KEY/" backend/.env
+vim backend/.env
+
+./scripts/start_frontend.sh build
+sudo mkdir -p /etc/nginx/conf.d
+sudo cp deploy/kubetrain2.nginx.conf /etc/nginx/conf.d/kubetrain2.conf
+sudo nginx -t && sudo systemctl reload nginx
+
+./scripts/start_backend.sh
+./scripts/status.sh
+```
+
+### 已有 conda 服务器
 
 ```bash
 cd /opt/KubeTrain2

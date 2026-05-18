@@ -38,15 +38,30 @@ if [[ ! -f "$BACKEND_DIR/.env" ]]; then
 fi
 
 if [[ -n "$PYTHON_CMD" ]]; then
-    RUNNER="$PYTHON_CMD run.py"
+    PY_RUNNER="$PYTHON_CMD"
 elif command -v conda >/dev/null 2>&1; then
-    RUNNER="conda run -n $CONDA_ENV python run.py"
+    PY_RUNNER="conda run -n $CONDA_ENV python"
 elif [[ -x "$BACKEND_DIR/venv/bin/python" ]]; then
-    RUNNER="$BACKEND_DIR/venv/bin/python run.py"
+    PY_RUNNER="$BACKEND_DIR/venv/bin/python"
 elif [[ -x "$PROJECT_ROOT/.venv/bin/python" ]]; then
-    RUNNER="$PROJECT_ROOT/.venv/bin/python run.py"
+    PY_RUNNER="$PROJECT_ROOT/.venv/bin/python"
 else
-    RUNNER="python3 run.py"
+    echo "ERROR: no Python runtime found for backend." >&2
+    echo "Install dependencies first, for example:" >&2
+    echo "  ./scripts/install_ubuntu_deps.sh" >&2
+    echo "or:" >&2
+    echo "  python3 -m venv .venv && . .venv/bin/activate && pip install -r backend/requirements.txt" >&2
+    exit 1
+fi
+RUNNER="$PY_RUNNER run.py"
+
+if ! bash -lc "$PY_RUNNER -c 'import dotenv, flask, flask_socketio, pymysql, redis'"; then
+    echo "ERROR: backend Python dependencies are incomplete." >&2
+    echo "Install them with one of:" >&2
+    echo "  ./scripts/install_ubuntu_deps.sh" >&2
+    echo "  conda run -n $CONDA_ENV pip install -r backend/requirements.txt" >&2
+    echo "  . .venv/bin/activate && pip install -r backend/requirements.txt" >&2
+    exit 1
 fi
 
 echo "Starting KubeTrain2 backend on port $PORT..."

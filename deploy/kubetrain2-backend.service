@@ -5,11 +5,9 @@ Wants=mysql.service redis-server.service
 
 [Service]
 Type=simple
-User=kubetrain
-Group=kubetrain
 WorkingDirectory=/opt/KubeTrain2/backend
 Environment=PYTHONUNBUFFERED=1
-ExecStart=/bin/bash -lc 'conda run -n bs python run.py'
+ExecStart=/opt/KubeTrain2/.venv/bin/python run.py
 Restart=always
 RestartSec=10
 StandardOutput=append:/opt/KubeTrain2/logs/backend.log
